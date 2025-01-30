@@ -1,0 +1,35 @@
+{
+  "name": "n-way-set-associative-cache",
+  "version": "1.0.0",
+  "description": "A TypeScript implementation of an N-way set-associative cache with configurable replacement policies, supporting operations like put, get, delete, and listAll. Optimized for performance and extensibility.",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsup",
+    "test": "vitest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "nwaysetassociativecache"
+  },
+  "keywords": [
+    "cache",
+    "n-way",
+    "set-associative",
+    "associative-cache",
+    "typescript",
+    "lru",
+    "caching",
+    "memory-cache",
+    "performance",
+    "data-structures",
+    "algorithms"
+  ],
+  "author": "Arslan Qamar",
+  "license": "MIT",
+  "devDependencies": {
+    "tsup": "^8.3.6",
+    "typescript": "^5.7.3"
+  }
+}
