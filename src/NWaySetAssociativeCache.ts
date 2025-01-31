@@ -22,7 +22,7 @@ export class NWaySetAssociativeCache<K extends PK, V>
   constructor(
     capacity: number,
     ways: number,
-    policy: ReplacementPolicy,
+    policy: ReplacementPolicy = ReplacementPolicy.LRU,
     storageType: StorageType = StorageType.InMemoryStorage,
     storageFactory: CacheDataStorageFactory = new CacheDataStorageFactory(),
     evictionManagerFactory: EvictionManagerFactory = new EvictionManagerFactory(),
