@@ -1,6 +1,6 @@
 {
   "name": "n-way-set-associative-cache",
-  "version": "1.0.0",
+  "version": "1.0.4",
   "description": "A TypeScript implementation of an N-way set-associative cache with configurable replacement policies, supporting operations like put, get, delete, and listAll. Optimized for performance and extensibility.",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",

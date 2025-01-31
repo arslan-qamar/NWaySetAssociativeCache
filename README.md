@@ -10,10 +10,10 @@ Install the package using npm or yarn:
 
 ```sh
 # Using npm
-npm install nway-set-associative-cache
+npm install n-way-set-associative-cache
 
 # Using yarn
-yarn add nway-set-associative-cache
+yarn add n-way-set-associative-cache
 ```
 
 ## Usage
@@ -21,7 +21,7 @@ yarn add nway-set-associative-cache
 Below is an example of how to use the **N-Way Set Associative Cache** in a Node.js project:
 
 ```typescript
-import { NWaySetAssociativeCache } from 'nway-set-associative-cache';
+import { NWaySetAssociativeCache } from 'n-way-set-associative-cache';
 
 // Create a cache with 4 sets and 2 items per set with LRU policy as default
 const cache = new NWaySetAssociativeCache<string, number>(4, 2);
@@ -78,9 +78,9 @@ Before submitting, please ensure your code adheres to the project's coding stand
 - Implemented core caching functionality with configurable eviction policies.
 - Provided a flexible API for insertion, retrieval, and eviction.
 
-For a complete list of changes, see the [CHANGELOG](CHANGELOG.md).
+For a complete list of changes, see the [CHANGELOG](https://github.com/arslan-qamar/NWaySetAssociativeCache/blob/master/CHANGELOG.md).
 
 ---
 
-For more details, visit the project's repository and documentation.
+For more details, visit the project's [repository](https://github.com/arslan-qamar/NWaySetAssociativeCache/).
 

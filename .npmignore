@@ -1,8 +1,15 @@
 /node_modules
 /src
 
+.vscode
 .env
 .DS_Store
+.nvmrc
 
 tsconfig.json
 tsup.config.ts
+package.json
+vitest.config.ts
+
+CHANGELOG.MD
+DESIGN.MD
