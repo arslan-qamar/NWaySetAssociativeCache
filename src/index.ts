@@ -1,3 +1,1 @@
-export function sayHello() {
-    // ..
-}
+export { NWaySetAssociativeCache } from "./NWaySetAssociativeCache";
