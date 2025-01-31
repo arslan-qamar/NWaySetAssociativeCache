@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.3] - 2025-01-30
+### Fixed
+- Minor issues with publishing and MD files.
+- Added how to build and test section in README.md
+
 ## [1.0.0] - 2025-01-30
 ### Added
 - Initial release of **N-Way Set Associative Cache**.
