@@ -1,12 +1,12 @@
 import { StorageType } from "../types/StorageTypes";
-import { EvictionManager } from "../interfaces/EvictionManager";
+import { IEvictionManager } from "../interfaces/IEvictionManager";
 import { InMemoryStorage } from "../storages/InMemoryStorage";
 import { CacheDataStorageManager } from "../abstract/CacheDataStorageManager";
 
 export interface StorageTypeConstructor<K, V> {
   new (
     capacity: number,
-    evictionManager: EvictionManager<K>,
+    evictionManager: IEvictionManager<K>,
   ): CacheDataStorageManager<K, V>;
 }
 

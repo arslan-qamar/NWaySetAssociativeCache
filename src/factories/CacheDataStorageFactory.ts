@@ -1,4 +1,4 @@
-import { EvictionManager } from "../interfaces/EvictionManager";
+import { IEvictionManager } from "../interfaces/IEvictionManager";
 import { StorageRegistry } from "../registeries/StorageTypeRegistry";
 import { PK } from "../types/PrimitiveKey";
 import { StorageType } from "../types/StorageTypes";
@@ -7,7 +7,7 @@ export class CacheDataStorageFactory {
   create<K extends PK, V>(
     capacity: number,
     storageType: StorageType,
-    evictionManager: EvictionManager<K>,
+    evictionManager: IEvictionManager<K>,
   ) {
     const StorageClass = StorageRegistry.getStorage<K, V>(storageType);
     if (!StorageClass) {

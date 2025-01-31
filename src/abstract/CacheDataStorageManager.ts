@@ -1,11 +1,11 @@
-import { EvictionManager } from "../interfaces/EvictionManager";
+import { IEvictionManager } from "../interfaces/IEvictionManager";
 import { PK } from "../types/PrimitiveKey";
 
 export abstract class CacheDataStorageManager<K extends PK, V> {
   protected capacity: number;
-  protected evictionManager: EvictionManager<K>;
+  protected evictionManager: IEvictionManager<K>;
 
-  constructor(capacity: number, evictionManager: EvictionManager<K>) {
+  constructor(capacity: number, evictionManager: IEvictionManager<K>) {
     this.capacity = capacity;
     this.evictionManager = evictionManager;
   }
@@ -14,7 +14,7 @@ export abstract class CacheDataStorageManager<K extends PK, V> {
     return this.capacity;
   }
 
-  getEvictionManager(): EvictionManager<K> {
+  getEvictionManager(): IEvictionManager<K> {
     return this.evictionManager;
   }
 

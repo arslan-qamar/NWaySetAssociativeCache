@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { CacheDataStorageManager } from "../../abstract/CacheDataStorageManager";
 import { CacheDataStorageFactory } from "../../factories/CacheDataStorageFactory";
-import { EvictionManager } from "../../interfaces/EvictionManager";
+import { IEvictionManager } from "../../interfaces/IEvictionManager";
 import { StorageRegistry } from "../../registeries/StorageTypeRegistry";
 import { InMemoryStorage } from "../../storages/InMemoryStorage";
 import { StorageType } from "../../types/StorageTypes";
@@ -10,7 +10,7 @@ import { StorageType } from "../../types/StorageTypes";
 class MockStorage<K, V> extends CacheDataStorageManager<K, V> {
   constructor(
     public capacity: number,
-    public evictionManager: EvictionManager<K>,
+    public evictionManager: IEvictionManager<K>,
   ) {
     super(capacity, evictionManager);
   }
@@ -29,7 +29,7 @@ class MockStorage<K, V> extends CacheDataStorageManager<K, V> {
 
 describe("CacheDataStorageFactory", () => {
   let factory: CacheDataStorageFactory;
-  let mockEvictionManager: EvictionManager<string>;
+  let mockEvictionManager: IEvictionManager<string>;
 
   beforeEach(() => {
     factory = new CacheDataStorageFactory();

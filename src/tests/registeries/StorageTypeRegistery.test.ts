@@ -1,13 +1,13 @@
 import { describe, expect, it } from "vitest";
 import { CacheDataStorageManager } from "../../abstract/CacheDataStorageManager";
-import { EvictionManager } from "../../interfaces/EvictionManager";
+import { IEvictionManager } from "../../interfaces/IEvictionManager";
 import { StorageRegistry } from "../../registeries/StorageTypeRegistry";
 import { InMemoryStorage } from "../../storages/InMemoryStorage";
 import { PK } from "../../types/PrimitiveKey";
 import { StorageType } from "../../types/StorageTypes";
 
 // Mock EvictionManager for testing
-class MockEvictionManager<K extends PK> implements EvictionManager<K> {
+class MockEvictionManager<K extends PK> implements IEvictionManager<K> {
   recordAccess(key: K): void {
     throw new Error("Method not implemented.");
   }
@@ -38,7 +38,7 @@ class MockStorage<K extends PK, V> extends CacheDataStorageManager<K, V> {
   clear(): void {
     throw new Error("Method not implemented.");
   }
-  constructor(capacity: number, evictionManager: EvictionManager<K>) {
+  constructor(capacity: number, evictionManager: IEvictionManager<K>) {
     super(capacity, evictionManager);
   }
 

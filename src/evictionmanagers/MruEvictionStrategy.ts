@@ -1,7 +1,7 @@
-import { EvictionManager } from "../interfaces/EvictionManager";
+import { IEvictionManager } from "../interfaces/IEvictionManager";
 import { PK } from "../types/PrimitiveKey";
 
-export class MruEvictionManager<K extends PK> implements EvictionManager<K> {
+export class MruEvictionManager<K extends PK> implements IEvictionManager<K> {
   private order: K[] = [];
 
   recordAccess(key: K): void {
