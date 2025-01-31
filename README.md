@@ -60,6 +60,20 @@ new NWaySetAssociativeCache<K, V>( capacity: number, ways: number)
 - **`clear(): void`** - Clears all entries from the cache.
 - **`listAll(): { key: K; value: V; }[]`** - Lists all items in the cache in all sets
 
+## How to Build
+
+To build the project, ensure you have the latest versions of Node.js and npm installed.
+
+```npm run build```
+
+## How to Test
+
+Run the test suite using the following command:
+
+```npm run test```
+
+
+
 ## Contributing
 
 We welcome contributions! To contribute:
