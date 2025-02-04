@@ -1,8 +1,9 @@
 import { CacheDataStorageManager } from "../abstract/CacheDataStorageManager";
+import { MyMap } from "../types/MyMap";
 import { PK } from "../types/PrimitiveKey";
 
 export class InMemoryStorage<K extends PK, V> extends CacheDataStorageManager<K, V> { 
-  private storage: Map<K, V> = new Map();
+  private storage: MyMap<K> = new MyMap<K>();
 
   add(key: K, value: V): void {
     if (this.storage.size >= this.capacity) {
@@ -35,7 +36,7 @@ export class InMemoryStorage<K extends PK, V> extends CacheDataStorageManager<K,
   }
 
   listAll(): Array<{ key: K; value: V }> {
-    return Array.from(this.storage.entries()).map(([key, value]) => ({ key, value }));
+    return this.storage.entries();
   }  
 
   clear(): void {
