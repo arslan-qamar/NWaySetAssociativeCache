@@ -53,7 +53,7 @@ new NWaySetAssociativeCache<K, V>( capacity: number, ways: number)
 
 #### Methods
 
-- **`set(key: K, value: V): void`** - Adds a key-value pair to the cache.
+- **`put(key: K, value: V): void`** - Adds a key-value pair to the cache.
 - **`get(key: K): V | undefined`** - Retrieves a value by key.
 - **`has(key: K): boolean`** - Checks if the key exists in the cache.
 - **`delete(key: K): boolean`** - Removes a key from the cache.
