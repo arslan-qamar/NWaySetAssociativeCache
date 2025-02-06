@@ -1,8 +1,6 @@
 import { describe, it, expect, beforeEach } from "vitest";
 import { NWaySetAssociativeCache } from "../NWaySetAssociativeCache";
 import { ReplacementPolicy } from "../types/ReplacementPolicy";
-import { StorageType } from "../types/StorageTypes";
-import { CacheDataStorageFactory } from "../factories/CacheDataStorageFactory";
 import { EvictionManagerFactory } from "../factories/EvictionManagerFactory";
 
 
@@ -14,8 +12,6 @@ describe("NWaySetAssociativeCache - listAll Method", () => {
       4, // capacity
       2, // ways
       ReplacementPolicy.LRU, // replacement policy
-      StorageType.InMemoryStorage, // storage type
-      new CacheDataStorageFactory(), // storage factory
       new EvictionManagerFactory() // eviction manager factory
     );
   });
