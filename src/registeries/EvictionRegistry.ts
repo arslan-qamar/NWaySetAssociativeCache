@@ -1,5 +1,5 @@
 import { LruEvictionManager } from "../evictionmanagers/LruEvictionManager";
-import { MruEvictionManager } from "../evictionmanagers/MruEvictionStrategy";
+import { MruEvictionManager } from "../evictionmanagers/MruEvictionManager";
 import { ReplacementPolicy } from "../types/ReplacementPolicy";
 
 type EvictionManagerConstructor<K> = new () => any;
