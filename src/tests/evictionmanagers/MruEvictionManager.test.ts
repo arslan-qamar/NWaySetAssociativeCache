@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it } from "vitest";
-import { MruEvictionManager } from "../../evictionmanagers/MruEvictionStrategy";
+import { MruEvictionManager } from "../../evictionmanagers/MruEvictionManager";
 
 describe("MruEvictionManager", () => {
   let evictionManager: MruEvictionManager<string>;
