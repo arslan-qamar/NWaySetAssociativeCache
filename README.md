@@ -96,5 +96,3 @@ For a complete list of changes, see the [CHANGELOG](https://github.com/arslan-qa
 
 ---
 
-For more details, visit the project's [repository](https://github.com/arslan-qamar/NWaySetAssociativeCache/).
-
