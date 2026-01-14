@@ -2,7 +2,6 @@ import { describe, expect, it } from "vitest";
 import { NWaySetAssociativeCacheFactory } from "../../factories/NWaySetAssociativeCacheFactory";
 import { NWaySetAssociativeCache } from "../../NWaySetAssociativeCache";
 import { ReplacementPolicy } from "../../types/ReplacementPolicy";
-import { StorageType } from "../../types/StorageTypes";
 
 describe("NWaySetAssociativeCacheFactory", () => {
   it("should create an instance of NWaySetAssociativeCache", () => {
@@ -10,7 +9,6 @@ describe("NWaySetAssociativeCacheFactory", () => {
       16,
       4,
       ReplacementPolicy.LRU,
-      StorageType.InMemoryStorage,
     );
 
     expect(cache).toBeInstanceOf(NWaySetAssociativeCache);
@@ -20,8 +18,7 @@ describe("NWaySetAssociativeCacheFactory", () => {
     const cache = NWaySetAssociativeCacheFactory.create<number, string>(
       8,
       2,
-      ReplacementPolicy.LRU,
-      StorageType.InMemoryStorage,
+      ReplacementPolicy.LRU
     );
 
     cache.put(1, "one");
@@ -36,8 +33,7 @@ describe("NWaySetAssociativeCacheFactory", () => {
     const cache = NWaySetAssociativeCacheFactory.create<number, string>(
       2, // Small capacity for easy testing
       2,
-      ReplacementPolicy.LRU, // Assuming LRU implementation
-      StorageType.InMemoryStorage,
+      ReplacementPolicy.LRU, // Assuming LRU implementation      
     );
 
     cache.put(1, "one");

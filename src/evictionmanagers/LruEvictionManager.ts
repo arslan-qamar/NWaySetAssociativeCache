@@ -22,4 +22,8 @@ export class LruEvictionManager<K extends PK> implements IEvictionManager<K> {
       this.order.splice(index, 1);
     }
   }
+
+  clear(): void {
+    this.order = [];
+  }
 }

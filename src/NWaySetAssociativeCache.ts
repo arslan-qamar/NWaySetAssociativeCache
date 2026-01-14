@@ -1,30 +1,24 @@
-import { CacheDataStorageManager } from "./abstract/CacheDataStorageManager";
-import { CacheDataStorageFactory } from "./factories/CacheDataStorageFactory";
 import { EvictionManagerFactory } from "./factories/EvictionManagerFactory";
 import { INWaySetAssociativeCache } from "./interfaces/INWaySetAssociativeCache";
 import { Logger } from "./logging/Logger";
+import { MyMap } from "./types/MyMap";
 import { PK } from "./types/PrimitiveKey";
 import { ReplacementPolicy } from "./types/ReplacementPolicy";
-import { StorageType } from "./types/StorageTypes";
 
 export class NWaySetAssociativeCache<K extends PK, V>
-  implements INWaySetAssociativeCache<K, V>
-{
-  private cache: Map<number, CacheDataStorageManager<K, V>>;
+  implements INWaySetAssociativeCache<PK, V> {
+  private cache: MyMap;
   private capacity: number;
   private ways: number;
   private policy: ReplacementPolicy;
-  private storageType: StorageType;
-  private storageFactory: CacheDataStorageFactory;
   private evictionManagerFactory: EvictionManagerFactory;
   private logger: Logger;
+  evictionManager: any;
 
   constructor(
     capacity: number,
     ways: number,
     policy: ReplacementPolicy = ReplacementPolicy.LRU,
-    storageType: StorageType = StorageType.InMemoryStorage,
-    storageFactory: CacheDataStorageFactory = new CacheDataStorageFactory(),
     evictionManagerFactory: EvictionManagerFactory = new EvictionManagerFactory(),
     logger?: Logger, // Optional logger
   ) {
@@ -34,15 +28,17 @@ export class NWaySetAssociativeCache<K extends PK, V>
     this.capacity = capacity;
     this.ways = ways;
     this.policy = policy;
-    this.storageType = storageType;
-    this.storageFactory = storageFactory;
     this.evictionManagerFactory = evictionManagerFactory;
-    this.cache = new Map<number, CacheDataStorageManager<K, V>>();
+    this.cache = new MyMap();
+
+    this.evictionManager = this.evictionManagerFactory.create<K>(
+      this.policy,
+    );
 
     // Use provided logger or default to console (just a concept not used anywhere since its a reuseable package)
     this.logger = logger || console;
   }
- 
+
 
   private getSetIndex(key: K): number {
     const numSets = Math.floor(this.capacity / this.ways); // Ensure it's an integer
@@ -61,48 +57,46 @@ export class NWaySetAssociativeCache<K extends PK, V>
 
   put(key: K, value: V): void {
     const setIndex = this.getSetIndex(key);
-    if (!this.cache.has(setIndex)) {
-      const evictionManager = this.evictionManagerFactory.create<K>(
-        this.policy,
-      );
-      const cacheDataStorage = this.storageFactory.create<K, V>(
-        this.capacity,
-        this.storageType,
-        evictionManager,
-      );
-      this.cache.set(setIndex, cacheDataStorage);
+
+    if (this.cache.size >= this.capacity) {
+      const evictionKey = this.evictionManager.selectEvictionKey();
+      if (evictionKey !== undefined) {
+        this.cache.delete(evictionKey);
+      }
     }
-    this.cache.get(setIndex)!.add(key, value);
+    this.cache.set(key, value);
+    this.evictionManager.recordAccess(key);
   }
 
   get(key: K): V | undefined {
     const setIndex = this.getSetIndex(key);
-    return this.cache.get(setIndex)?.get(key);
+    this.evictionManager.recordAccess(key);
+    return this.cache.get(key);
   }
 
   has(key: K): boolean {
     const setIndex = this.getSetIndex(key);
-    return this.cache.has(setIndex) && this.cache.get(setIndex)!.has(key);
+    return this.cache.has(setIndex) && this.cache.has(key);
   }
 
   delete(key: K): boolean {
     const setIndex = this.getSetIndex(key);
-    return this.cache.get(setIndex)?.delete(key) ?? false;
+    this.evictionManager.removeKey(key);
+    return this.cache.delete(key) ?? false;
   }
 
   clear(): void {
     this.cache.clear();
+    this.evictionManager.clear();
   }
 
-  listAll(): { key: K; value: V; }[] {
-    const entries: { key: K; value: V }[] = [];
-    
-    this.cache.forEach((storageManager) => {
-      storageManager.listAll().forEach(entry => {
-        entries.push(entry);
-      });
-    });  
+  listAll(): { key: PK; value: V; }[] {
+    const entries: { key: PK; value: V }[] = [];
+
+    this.cache.entries().forEach((entry) => {
+      entries.push({key: entry.key, value: entry.value});
+    });
     return entries;
   }
-  
+
 }

@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it } from "vitest";
 import { LruEvictionManager } from "../../evictionmanagers/LruEvictionManager";
-import { MruEvictionManager } from "../../evictionmanagers/MruEvictionStrategy";
+import { MruEvictionManager } from "../../evictionmanagers/MruEvictionManager";
 import { EvictionManagerRegistry } from "../../registeries/EvictionRegistry";
 import { ReplacementPolicy } from "../../types/ReplacementPolicy";
 

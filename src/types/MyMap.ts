@@ -6,7 +6,7 @@ import { PK } from "./PrimitiveKey";
  * A custom implementation of a hash map (dictionary).
  * Uses a hash table with linked list chaining for collision resolution.
  */
-export class MyMap<K extends PK> {
+export class MyMap {
     /**
      * The array of buckets, where each bucket holds a linked list of `MapNode` instances.
      * Each bucket corresponds to a hash index.
@@ -23,7 +23,7 @@ export class MyMap<K extends PK> {
         this.capacity = capacity;
     }
 
-    private hash(key: K): number {
+    private hash(key: PK): number {
         let hash = 0;
         const keyStr = typeof key === "string" ? key : JSON.stringify(key);
         for (let i = 0; i < keyStr.length; i++) {
@@ -32,7 +32,7 @@ export class MyMap<K extends PK> {
         return hash;
     }
 
-    set(key: K, value: any): void {
+    set(key: PK, value: any): void {
         const index = this.hash(key);
         const newEntry = new MapEntry(key, value);
 
@@ -73,11 +73,11 @@ export class MyMap<K extends PK> {
         }
     }
 
-    has(key: K): boolean {
+    has(key: PK): boolean {
         return this.get(key) !== undefined;
     }
 
-    get(key: K): any | undefined {
+    get(key: PK): any | undefined {
         const index = this.hash(key);
         let current = this.buckets[index];
 
@@ -90,7 +90,7 @@ export class MyMap<K extends PK> {
         return undefined;
     }
 
-    delete(key: K): boolean {
+    delete(key: PK): boolean {
         const index = this.hash(key);
         let current = this.buckets[index];
         let prev: MapNode | null = null;
@@ -115,8 +115,8 @@ export class MyMap<K extends PK> {
         return this._size;
     }
 
-    entries(): Array<{ key: K; value: any }> {
-        const result: Array<{ key: K; value: any }> = [];
+    entries(): Array<{ key: PK; value: any }> {
+        const result: Array<{ key: PK; value: any }> = [];
         for (const bucket of this.buckets) {
             let current = bucket;
             while (current !== null) {
@@ -127,12 +127,12 @@ export class MyMap<K extends PK> {
         return result;
     }
 
-    [Symbol.iterator](): Iterator<{ key: K; value: any }> {
+    [Symbol.iterator](): Iterator<{ key: PK; value: any }> {
         let index = 0;
         const entries = this.entries();
 
         return {
-            next: (): IteratorResult<{ key: K; value: any }> => {
+            next: (): IteratorResult<{ key: PK; value: any }> => {
                 if (index < entries.length) {
                     return { value: entries[index++], done: false };
                 }
